@@ -2,8 +2,8 @@
 
 const { sequelize, DataTypes } = require("../database");
 
-const cliente = sequelize.define(
-  "Cliente",
+const pasajeros = sequelize.define(
+  "pasajeros",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -23,7 +23,7 @@ const cliente = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    fecha_ingreso: {
+    fecha_de_vuelo: {
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
@@ -39,7 +39,7 @@ const cliente = sequelize.define(
     deletedAt: true,
   }
 );
-cliente.sync({ force: false }).then(() => {
+pasajeros.sync({ force: true }).then(() => {
   console.log("Tabla de Reservas creada");
 });
 module.exports = cliente;

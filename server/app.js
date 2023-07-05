@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const path = require("path");
 require("dotenv").config();
 require("ejs");
+
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -47,4 +48,4 @@ app.use((req, res, next) => {
 });
 
 // Starting the server
-app.listen(45635, () => console.log("http://localhost:${port}/tareas"));
+app.listen(45635, () => console.log(`Server on http://localhost:${port}`));
