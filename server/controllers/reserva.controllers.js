@@ -1,19 +1,20 @@
+const pasajeros = require("../models/Reserva");
 const Reserva = require("../models/Reserva");
 const ctrl = {};
 
 //         vistas para las reservas
 
 ctrl.renderListaReservas = (req, res) => {
-  res.render("listadoReser");
+  res.render("listado-reserva.ejs");
 };
 
 ctrl.renderFormNuevaReserva = (req, res) => {
-  res.render("reserCreate");
+  res.render("nueva-reserva.ejs");
 };
 
 ctrl.renderFormEditarReserva = (req, res) => {
   const { id } = req.params;
-  res.render("editReserva", { id });
+  res.render("editar-reserva", { id });
 };
 
 // ==========================================
@@ -23,7 +24,7 @@ ctrl.renderFormEditarReserva = (req, res) => {
 // Obtener todas las reservas
 ctrl.obtenerReservas = async (req, res) => {
   try {
-    const reservas = await cliente.findAll({
+    const reservas = await pasajeros.findAll({
       where: {
         estado: true,
       },
@@ -42,7 +43,7 @@ ctrl.obtenerReservas = async (req, res) => {
 ctrl.obtenerReserva = async (req, res) => {
   try {
     const { id } = req.params.id;
-    const reserva = await cliente.findOne({
+    const reserva = await pasajeros.findOne({
       where: {
         estado: true,
         id,
@@ -59,15 +60,15 @@ ctrl.obtenerReserva = async (req, res) => {
 
 // Crear una reserva
 ctrl.crearReserva = async (req, res) => {
-  const { nombre, apellido, fecha_ingreso, fecha_salida } = req.body; // JSON.stringify(reserva);
+  const { nombre, apellido, fecha_de_vuelo, cantida_personas } = req.body;
 
   try {
-    const nuevaReserva = new cliente({
+    const nuevaReserva = new pasajeros({
       codigo: new Date().getTime(),
       nombre,
       apellido,
-      fecha_ingreso,
-      fecha_salida,
+      fecha_de_vuelo,
+      cantida_personas,
     });
 
     await nuevaReserva.save();
@@ -82,14 +83,14 @@ ctrl.crearReserva = async (req, res) => {
 // Actualizar una reserva
 ctrl.actualizarReserva = async (req, res) => {
   const reservaId = req.params.id;
-  const { nombre, apellido, fecha_ingreso, fecha_salida } = req.body;
+  const { nombre, apellido, fecha_de_vuelo, cantida_personas } = req.body;
   try {
     const reserva = await Reserva.findByPk(reservaId);
     reserva.update({
       nombre,
       apellido,
-      fecha_ingreso,
-      fecha_salida,
+      fecha_de_vuelo,
+      cantida_personas,
     });
     return res.json(reserva);
   } catch (error) {

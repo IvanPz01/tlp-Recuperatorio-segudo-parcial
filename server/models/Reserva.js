@@ -27,6 +27,10 @@ const pasajeros = sequelize.define(
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
+    cantida_personas: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     estado: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -39,7 +43,7 @@ const pasajeros = sequelize.define(
     deletedAt: true,
   }
 );
-pasajeros.sync({ force: true }).then(() => {
+pasajeros.sync({ force: false }).then(() => {
   console.log("Tabla de Reservas creada");
 });
-module.exports = cliente;
+module.exports = pasajeros;

@@ -1,6 +1,6 @@
 const obtenerDatos = async () => {
   // Pedir las reservas al servidor
-  const data = await fetch("http://localhost:3000/api", {
+  const data = await fetch("http://localhost:5000/api", {
     method: "GET",
   });
   const reservas = await data.json();
@@ -15,12 +15,10 @@ const mostrarReservas = (reservas, tablaElement) => {
                 <td>${reserva.codigo}</td>
                 <td>${reserva.nombre}</td>
                 <td>${reserva.apellido}</td>
-                <td>${dayjs(reserva.fecha_ingreso).format(
+                <td>${dayjs(reserva.fecha_de_vuelo).format(
                   "DD-MM-YYYY HH:mm"
                 )}</td>
-                <td>${dayjs(reserva.fecha_salida).format(
-                  "DD-MM-YYYY HH:mm"
-                )}</td>
+                <td>${reserva.cantida_personas}</td>
                 <td class="gap-1">               
                     <a href="/actualizar-reserva/${
                       reserva.id
@@ -42,8 +40,9 @@ const mostrarReservas = (reservas, tablaElement) => {
 const eliminarReserva = async (e) => {
   console.log(e);
   const id = e.target.dataset.id;
-
-  // Se pregunta al usuario si está seguro de eliminar la reserva
+  if (!id) {
+    alert("ID undefined", id);
+  } // Se pregunta al usuario si está seguro de eliminar la reserva
   const result = await Swal.fire({
     title: "¿Está seguro de eliminar la reserva?",
     text: "Esta acción no se puede deshacer",
@@ -81,10 +80,10 @@ const eliminarReserva = async (e) => {
     confirmButtonText: "Aceptar",
   });
 
-  setTimeout(() => {
-    // Redireccionar al usuario
-    window.location.href = "/";
-  }, 2000);
+  // setTimeout(() => {
+  //   // Redireccionar al usuario
+  //   window.location.href = "/";
+  // }, 2000);
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

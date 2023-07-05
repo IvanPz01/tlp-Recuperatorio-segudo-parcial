@@ -3,8 +3,7 @@ const reservaId = formReserva.dataset.id;
 
 const nombre = document.querySelector("#nombre");
 const apellido = document.querySelector("#apellido");
-const fecha_ingreso = document.querySelector("#fechaingreso");
-const fecha_salida = document.querySelector("#fechasalida");
+const fecha_de_vuelo = document.querySelector("#fechaingreso");
 
 document.addEventListener("DOMContentLoaded", async () => {
   const response = await fetch(`/api/${reservaId}`);
@@ -12,9 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   nombre.value = data.nombre;
   apellido.value = data.apellido;
-  fecha_ingreso.value = data.fecha_ingreso;
-  fecha_ingreso.value = dayjs(data.fecha_ingreso).format("DD-MM-YYYY");
-  fecha_salida.value = dayjs(data.fecha_salida).format("DD-MM-YYYY");
+  fecha_de_vuelo.value = data.fecha_de_vuelo;
+  fecha_de_vuelo.value = dayjs(data.fecha_de_vuelo).format("DD-MM-YYYY");
 });
 
 formReserva.addEventListener("submit", async (e) => {
@@ -23,7 +21,7 @@ formReserva.addEventListener("submit", async (e) => {
   reservaActualizada = {
     nombre: nombre.value,
     apellido: apellido.value,
-    fecha_ingreso: fecha_ingreso.value,
+    fecha_de_vuelo: fecha_de_vuelo.value,
     fecha_salida: fecha_salida.value,
   };
 

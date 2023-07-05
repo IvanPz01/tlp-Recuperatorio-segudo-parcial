@@ -5,14 +5,14 @@ formCrearReserva.addEventListener("submit", async (e) => {
 
   const nombre = document.querySelector("#nombre").value;
   const apellido = document.querySelector("#apellido").value;
-  const fecha_ingreso = document.querySelector("#fecha_ingreso").value;
-  const fecha_salida = document.querySelector("#fecha_salida").value;
+  const fecha_de_vuelo = document.querySelector("#fecha_ingreso").value;
+  const cantida_personas = document.querySelector("#cantidad_personas").value;
 
   const cliente = {
     nombre,
     apellido,
-    fecha_ingreso,
-    fecha_salida,
+    fecha_de_vuelo,
+    cantida_personas,
   };
 
   const response = await fetch("/api", {

@@ -49,17 +49,12 @@
             />
           </div>
 
-          <!-- Fecha Salida -->
-          <div class="col col-md-6 col-sm-12 mb-3">
-            <label for="fecha_salida" class="form-label">Fecha Salida</label>
-            <input
-              type="date"
-              required="true"
-              class="form-control"
-              id="fecha_salida"
-              name="fecha_salida"
-            />
-          </div>
+          <div class="col col-sm-12 col-md-6 mb-3">
+            <label for="cantidad_personas" class="form-label">Cant. Personas</label>
+            <input type="number" required="true" class="form-control" id="cantidad_personas"
+                name="cantidad_personas">
+        </div>
+    </div>
         </div>
 
         <div class="row d-flex align-items-center justify-content-end">
@@ -77,6 +72,6 @@
   </div>
 </div>
 
-<script src="/crear-reserva.js"></script>
+<script src="/reserCreate.js"></script>
 
 <%- include('partials/footer') %>
