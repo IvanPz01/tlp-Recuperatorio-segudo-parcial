@@ -16,3 +16,44 @@ document.addEventListener("DOMContentLoaded", async () => {
   fecha_ingreso.value = dayjs(data.fecha_ingreso).format("DD-MM-YYYY");
   fecha_salida.value = dayjs(data.fecha_salida).format("DD-MM-YYYY");
 });
+
+formReserva.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  reservaActualizada = {
+    nombre: nombre.value,
+    apellido: apellido.value,
+    fecha_ingreso: fecha_ingreso.value,
+    fecha_salida: fecha_salida.value,
+  };
+
+  const response = await fetch(`/api/${reservaId}`, {
+    method: "PUT",
+    body: JSON.stringify(reservaActualizada),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const errorRes = await response.json();
+
+  if (response.status !== 200) {
+    return Swal.fire({
+      title: "Error",
+      text: errorRes.message,
+      icon: "error",
+      confirmButtonText: "Aceptar",
+    });
+  }
+
+  Swal.fire({
+    title: "Reserva actualizada",
+    text: respToJson.message,
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+
+  setTimeout(() => {
+    window.location.href = "/";
+  }, 2000);
+});
